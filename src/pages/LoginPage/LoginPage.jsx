@@ -4,7 +4,7 @@ import {ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { nanoid } from 'nanoid';
 import { login } from 'redux/authOperations';
-import { LoginFormStyled } from './LoginPageStyled';
+import { LoginFormStyled, LoginPageWrapper } from './LoginPageStyled';
 
 export default function LoginForm() {
 
@@ -41,7 +41,7 @@ export default function LoginForm() {
 };
 
     return (
-        <>
+        <LoginPageWrapper>
             <LoginFormStyled onSubmit={handleSubmit}>
                 <label htmlFor='{numberId}'>
                     User e-mail
@@ -52,8 +52,6 @@ export default function LoginForm() {
                     name="email"
                     value={email}
                     onChange={handleChange}
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                    title="Invalid email address. Must content @"
                     placeholder="Enter your e-mail"
                     required
                 />
@@ -72,6 +70,6 @@ export default function LoginForm() {
                 <button type="submit">Click to Login</button>
             </LoginFormStyled>
             <ToastContainer autoClose={3000} />
-        </>
+        </LoginPageWrapper>
     )
 };

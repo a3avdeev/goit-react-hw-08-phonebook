@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { signup, login, logout, current } from './authOperations';
 
 const initialState = {
-  user: {},
-  token: '',
-  isLogin: false,
+  user: { name: null, email: null },
+  token: null,
+  isLoggedIn: false,
   loading: false,
   isLoadingUser: false,
   error: null,
@@ -22,7 +22,7 @@ const authSlice = createSlice({
       store.loading = false;
       store.user = payload.user;
       store.token = payload.token;
-      store.isLogin = true;
+      store.isLoggedIn = true;
     },
     [signup.rejected]: (store, { payload }) => {
       store.loading = false;
@@ -36,21 +36,22 @@ const authSlice = createSlice({
       store.loading = false;
       store.user = payload.user;
       store.token = payload.token;
-      store.isLogin = true;
+      store.isLoggedIn = true;
     },
     [login.rejected]: (store, { payload }) => {
       store.loading = false;
       store.error = payload;
+      store.isLoggedIn = false;
     },
     [logout.pending]: store => {
       store.loading = true;
       store.error = null;
     },
-    [logout.fulfilled]: (store, { payload }) => {
+    [logout.fulfilled]: store => {
       store.loading = false;
-      store.user = {};
-      store.token = '';
-      store.isLogin = false;
+      store.user = { name: null, email: null };
+      store.token = null;
+      store.isLoggedIn = false;
     },
     [logout.rejected]: (store, { payload }) => {
       store.loading = false;
@@ -63,7 +64,7 @@ const authSlice = createSlice({
     [current.fulfilled]: (store, { payload }) => {
       store.isLoadingUser = false;
       store.user = payload.user;
-      store.isLogin = true;
+      store.isLoggedIn = true;
     },
     [current.rejected]: (store, { payload }) => {
       store.isLoadingUser = false;
@@ -73,3 +74,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
+export const getAuth = state => state.auth;

@@ -1,37 +1,43 @@
-import Phonebook from "./Phonebook/Phonebook"
 import { Route, Routes } from "react-router-dom";
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { SharedLayout } from './SharedLayout/SharedLayout';
+import { current } from "redux/authOperations";
+import { getAuth } from "redux/selectors";
+import { Loader } from "./Loader/Loader";
+import { PublicRoute } from "./PublicRoute/PublicRoute";
+import { PrivateRoute } from "./PrivateRoute/PrivateRoute";
 // import { Navigate } from "react-router-dom";
-
-// const createAsyncComponent = (path) => lazy(() => import(path));
-
-// const Home = createAsyncComponent("../pages/Home/Home");
-// const Movies = createAsyncComponent("../pages/Movies/Movies");
-// const MovieDetails = createAsyncComponent("../pages/MovieDetails/MovieDetails");
-// const Cast = createAsyncComponent("./Cast/Cast");
-// const Reviews = createAsyncComponent("./Reviews/Reviews");
-// const NotFound = createAsyncComponent("../pages/NotFound/NotFound");
 
 const Home = lazy(() => import('../pages/HomePage/HomePage'))
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'))
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'))
-// const Cast = lazy(() => import('../components/Cast/Cast'))
-// const Reviews = lazy(() => import('../components/Reviews/Reviews'))
+const Phonebook = lazy(() => import('../components/Phonebook/Phonebook'))
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage/NotFoundPage')) 
 
-
 export const App = () => {
+  const dispatch = useDispatch();
+  const { isLoadingUser } = useSelector(getAuth);
+
+  useEffect(() => {
+    dispatch(current())
+  }, [dispatch])
+
   return (
-    <Routes>
-      <Route path="/" element={<SharedLayout />}>
-        <Route index element={<Home />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/contacts" element={<Phonebook />} />
-        <Route path="*" element={<NotFoundPage />} />
-        {/* <Route path="*" element={<Navigate to="/" replace={true} />} /> */}
-      </Route>
-    </Routes>
+    <>
+      {isLoadingUser ? <Loader /> :
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
+          <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
+          <Route path="/contacts" element={<PrivateRoute><Phonebook /></PrivateRoute>} />
+          <Route path="*" element={<NotFoundPage />} />
+          {/* <Route path="*" element={<Navigate to="/" replace={true} />} /> */}
+        </Route>
+      </Routes>
+      }
+    </>
+    
   );
 };

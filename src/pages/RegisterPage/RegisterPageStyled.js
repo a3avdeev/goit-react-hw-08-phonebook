@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const RegisterPageWrapper = styled.div`
+  padding: 20px;
+`;
+
 export const RegisterFormStyled = styled.form`
   display: flex;
   flex-direction: column;

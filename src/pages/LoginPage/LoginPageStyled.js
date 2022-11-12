@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const LoginPageWrapper = styled.div`
+  padding: 20px;
+`;
+
 export const LoginFormStyled = styled.form`
   display: flex;
   flex-direction: column;
