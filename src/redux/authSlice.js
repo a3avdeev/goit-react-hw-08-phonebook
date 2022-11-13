@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { signup, login, logout, current } from './authOperations';
+import { toast } from 'react-toastify';
 
 const initialState = {
   user: { name: null, email: null },
@@ -27,6 +28,14 @@ const authSlice = createSlice({
     [signup.rejected]: (store, { payload }) => {
       store.loading = false;
       store.error = payload;
+      toast.error(
+        `Oops! ${
+          payload.status === 400 ? 'User creation error' : 'Server error'
+        }. Please try again`,
+        {
+          theme: 'colored',
+        }
+      );
     },
     [login.pending]: store => {
       store.loading = true;
@@ -42,6 +51,15 @@ const authSlice = createSlice({
       store.loading = false;
       store.error = payload;
       store.isLoggedIn = false;
+      console.log(payload);
+      toast.error(
+        `Oops! ${
+          payload.status === 400 ? 'Login error' : 'Server error'
+        }. Please try again`,
+        {
+          theme: 'colored',
+        }
+      );
     },
     [logout.pending]: store => {
       store.loading = true;
@@ -56,6 +74,16 @@ const authSlice = createSlice({
     [logout.rejected]: (store, { payload }) => {
       store.loading = false;
       store.error = payload;
+      toast.error(
+        `Oops! ${
+          payload.status === 401
+            ? 'Missing header with authorization token'
+            : 'Server error'
+        }. Please try again`,
+        {
+          theme: 'colored',
+        }
+      );
     },
     [current.pending]: store => {
       store.isLoadingUser = true;
@@ -65,12 +93,10 @@ const authSlice = createSlice({
       store.isLoadingUser = false;
       store.user = payload;
       store.isLoggedIn = true;
-      //   console.log(payload);
     },
     [current.rejected]: (store, { payload }) => {
       store.isLoadingUser = false;
       store.error = payload;
-      //   console.log('ошибка из Slice');
     },
   },
 });

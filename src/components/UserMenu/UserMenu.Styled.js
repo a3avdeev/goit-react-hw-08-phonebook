@@ -20,6 +20,7 @@ export const NavItem = styled(NavLink)`
   gap: 20px;
   padding: 10px;
   border-radius: 4px;
+  border: 2px dotted #ff1493;
   text-decoration: none;
   color: black;
   font-weight: bold;
@@ -30,7 +31,8 @@ export const NavItem = styled(NavLink)`
   }
   :hover:not(.active),
   :focus-visible:not(.active) {
-    color: blue;
+    color: #0000cd;
+    border: 2px dotted #0000cd;
   }
 `;
 

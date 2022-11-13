@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
 import * as api from '../components/API/auth';
 
 export const signup = createAsyncThunk(
@@ -64,10 +63,9 @@ export const current = createAsyncThunk(
       try {
         // If there is a token, add it to the HTTP header and perform the request
         const result = await api.getCurrentUser(persistedToken);
-        console.log(result);
+        // console.log(result);
         return result;
       } catch (error) {
-        // console.log('ошибка из операций');
         return rejectWithValue(error.message);
       }
     }

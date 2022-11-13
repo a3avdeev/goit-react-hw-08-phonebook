@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from 'redux/authOperations';
 // import { getAuth } from 'redux/selectors';
 import { getIsLoggedIn, getUser } from 'redux/selectors';
-import { HeaderStyled, NavItem, UserMenuStyled } from './UserMenu.Styled'
+import { HeaderStyled, NavItem, UserMenuStyled } from './UserMenu.Styled';
 
 export const UserMenu = () => {
 
@@ -26,7 +26,7 @@ export const UserMenu = () => {
                         <NavItem to="/" end>Home</NavItem>
                         <div>
                             <NavItem to='/contacts'>Contacts</NavItem>
-                            <span>{`Hello, ${data.email}`}</span>
+                            <span>{`Hello, ${data.name} | ${data.email}`}</span>
                             <button type='button' onClick={onLogout}>Logout</button>
                         </div>
                     </UserMenuStyled> :
