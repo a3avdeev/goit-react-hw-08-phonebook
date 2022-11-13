@@ -5,6 +5,7 @@ export const ContactForm = styled.form`
   flex-direction: column;
   max-width: 600px;
   border: 2px solid black;
+  background-color: tan;
   border-radius: 8px;
   padding: 10px;
 

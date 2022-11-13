@@ -8,6 +8,7 @@ export const FilterStyled = styled.div`
   & label {
     margin-bottom: 20px;
     font-size: 1.1em;
+    
   }
 
   & input {

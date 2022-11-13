@@ -64,7 +64,7 @@ export const current = createAsyncThunk(
       try {
         // If there is a token, add it to the HTTP header and perform the request
         const result = await api.getCurrentUser(persistedToken);
-        console.log(result.name);
+        console.log(result);
         return result;
       } catch (error) {
         // console.log('ошибка из операций');

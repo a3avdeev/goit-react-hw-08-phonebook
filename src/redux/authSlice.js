@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { signup, login, logout, current } from './authOperations';
 
 const initialState = {
-  user: {},
+  user: { name: null, email: null },
   token: '',
   isLoggedIn: false,
   loading: false,
@@ -63,7 +63,7 @@ const authSlice = createSlice({
     },
     [current.fulfilled]: (store, { payload }) => {
       store.isLoadingUser = false;
-      store.user = payload.name;
+      store.user = payload;
       store.isLoggedIn = true;
       //   console.log(payload);
     },

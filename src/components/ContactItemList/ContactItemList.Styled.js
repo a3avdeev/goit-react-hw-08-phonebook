@@ -25,6 +25,10 @@ export const ContactList = styled.ul`
       width: 450px;
       font-size: 1.2em;
       margin: 10px;
+      padding: 4px;
+      border: 1px solid black;
+      border-radius: 4px;
+      background-color: tan;
     }
 
     & button {

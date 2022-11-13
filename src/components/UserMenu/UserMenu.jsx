@@ -9,7 +9,7 @@ import { HeaderStyled, NavItem, UserMenuStyled } from './UserMenu.Styled'
 export const UserMenu = () => {
 
     const isLoggedIn = useSelector(getIsLoggedIn);
-    const name = useSelector(getUser);
+    const data = useSelector(getUser);
     // const { user, isLoggedIn } = useSelector(getAuth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -21,21 +21,23 @@ export const UserMenu = () => {
 
     return (
         <HeaderStyled>
-            <>
                 {isLoggedIn ?
                     <UserMenuStyled>
                         <NavItem to="/" end>Home</NavItem>
-                        <NavItem to='/contacts'>Contacts</NavItem>
-                        <span>{`Hello, ${name}`}</span>
-                        <button type='button' onClick={onLogout}>Logout</button>
+                        <div>
+                            <NavItem to='/contacts'>Contacts</NavItem>
+                            <span>{`Hello, ${data.email}`}</span>
+                            <button type='button' onClick={onLogout}>Logout</button>
+                        </div>
                     </UserMenuStyled> :
                     <UserMenuStyled>
                         <NavItem to="/" end>Home</NavItem>
-                        <NavItem to='/register'>Register</NavItem>
-                        <NavItem to='/login'>Login</NavItem>
+                        <div>
+                            <NavItem to='/register'>Register</NavItem>
+                            <NavItem to='/login'>Login</NavItem>
+                        </div>
                     </UserMenuStyled>
                 }
-            </>
         </HeaderStyled>
     );
 }

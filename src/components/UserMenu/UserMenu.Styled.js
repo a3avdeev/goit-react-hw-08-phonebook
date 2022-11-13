@@ -12,13 +12,6 @@ export const HeaderStyled = styled.header`
   background-color: #fff;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-
-  // & nav {
-  //   display: flex;
-  //   flex-direction: row;
-  //   justify-content: space-between;
-  //   align-items: center;
-  // }
 `;
 
 export const NavItem = styled(NavLink)`
@@ -44,9 +37,11 @@ export const NavItem = styled(NavLink)`
 export const UserMenuStyled = styled.nav`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  width: 100%;
   padding: 10px;
   border-radius: 4px;
   text-decoration: none;
@@ -54,18 +49,27 @@ export const UserMenuStyled = styled.nav`
   font-weight: bold;
   font-size: 1.2em;
 
-  & button {
-    padding: 6px;
-    max-width: 140px;
-    font-size: 0.75em;
-    border: 1px solid black;
-    border-radius: 4px;
+  & div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 
-    &:hover,
-    :focus {
-      background-color: #00bfff;
-      color: #ffffff;
-      cursor: pointer;
+    & button {
+      padding: 6px;
+      max-width: 140px;
+      font-size: 0.75em;
+      border: 1px solid black;
+      border-radius: 4px;
+
+      &:hover,
+      :focus {
+        background-color: #00bfff;
+        color: #ffffff;
+        cursor: pointer;
+      }
     }
   }
 `;
