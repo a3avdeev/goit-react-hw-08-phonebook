@@ -30,7 +30,7 @@ export const Contact = ({ contact }) => {
 return (
     <li key={contact.id} >
         <BsFillPersonFill />
-        <p>{contact.name}: {contact.phone}</p>
+        <p>{contact.name}: {contact.number}</p>
         <button type="button" onClick={handleDelete}>{deletingItem === contact.id ? <span>Deleting...</span> : <span>Delete</span>}</button>
         <ToastContainer autoClose={3000} />
     </li>

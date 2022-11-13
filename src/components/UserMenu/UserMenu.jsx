@@ -2,46 +2,41 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from 'redux/authOperations';
-import { getAuth } from 'redux/authSlice';
-import { HeaderStyled, NavItem } from './UserMenu.Styled'
+// import { getAuth } from 'redux/selectors';
+import { getIsLoggedIn, getUser } from 'redux/selectors';
+import { HeaderStyled, NavItem, UserMenuStyled } from './UserMenu.Styled'
 
 export const UserMenu = () => {
-    const {user, isLoggedIn } = useSelector(getAuth);
+
+    const isLoggedIn = useSelector(getIsLoggedIn);
+    const name = useSelector(getUser);
+    // const { user, isLoggedIn } = useSelector(getAuth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const onLogoutClick = () => {
+    const onLogout = () => {
         dispatch(logout())
         navigate('/')
-    }
-
-    
-    console.log(user)
+    };
 
     return (
         <HeaderStyled>
-            <nav >
-                {isLoggedIn &&
-                    <>
+            <>
+                {isLoggedIn ?
+                    <UserMenuStyled>
                         <NavItem to="/" end>Home</NavItem>
                         <NavItem to='/contacts'>Contacts</NavItem>
-                    </>
-                    }
-                {isLoggedIn ?
-                    <div >
-                        <p >{`Hello, ${user}`}</p>
-                        
-                        <button type='button' onClick={onLogoutClick}>Log Out</button>
-                    </div> :
-                    <div>
+                        <span>{`Hello, ${name}`}</span>
+                        <button type='button' onClick={onLogout}>Logout</button>
+                    </UserMenuStyled> :
+                    <UserMenuStyled>
                         <NavItem to="/" end>Home</NavItem>
                         <NavItem to='/register'>Register</NavItem>
                         <NavItem to='/login'>Login</NavItem>
-                    </div>
+                    </UserMenuStyled>
                 }
-            </nav>
+            </>
         </HeaderStyled>
     );
 }
 
-export default UserMenu

@@ -57,6 +57,7 @@ export default function RegisterForm() {
                     type="text"
                     name="name"
                     value={name}
+                    autoComplete="username"
                     onChange={handleChange}
                     title="Enter your Name"
                     placeholder="Enter your Name"
@@ -70,6 +71,7 @@ export default function RegisterForm() {
                     type="email"
                     name="email"
                     value={email}
+                    autoComplete="username"
                     onChange={handleChange}
                     title="Enter valid E-Mail"
                     placeholder="Enter valid E-Mail"
@@ -82,6 +84,7 @@ export default function RegisterForm() {
                     id={passwordId}
                     type="password"
                     name="password"
+                    autoComplete="new-password"
                     value={password}
                     onChange={handleChange}
                     title="Enter minimum 7 simbols"

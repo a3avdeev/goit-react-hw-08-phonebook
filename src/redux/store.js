@@ -15,7 +15,7 @@ import { contactsReducer } from './contactsSlice';
 import { authReducer } from './authSlice';
 
 const persistConfig = {
-  key: 'token',
+  key: 'auth',
   storage,
   whitelist: ['token'],
 };
@@ -28,7 +28,7 @@ export const store = configureStore({
     contacts: contactsReducer,
     filter: filterReducer,
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
